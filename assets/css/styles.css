@@ -209,6 +209,11 @@ body, html{
 	left: 13px;
 }
 
+#hide-wave.disabled{
+	pointer-events: none;
+	color: #758389;
+}
+
 /*---------------------------
 		Playlist
 ---------------------------*/

@@ -482,6 +482,23 @@ $('#add-files').on('click', function(){
 	console.log("add file");
 	document.getElementById("file-input").click();
 });
+
+$('#hide-wave').on('click', function(){
+	console.log("hide wave");
+
+	var waveBar = $('#wave');
+
+	if(waveBar.hasClass('disabled')){
+		waveBar.removeClass('disabled');
+		if(wavesurfer.isPlaying()){
+			wavesurfer.drawBuffer();
+		}
+	}
+	else{
+		waveBar.addClass('disabled');
+	}
+
+});
 /*----------------------
 	Playlist navigation
 ----------------------*/
@@ -594,6 +611,8 @@ $('#playlist').on('click', function (e) {
 					$('#shuffle-button').addClass('disabled');
 					$('#repeat-button').addClass('disabled');
 					$('#wave').addClass('disabled');
+					$('#hide-wave').addClass('disabled');
+
 					startPlayerWhenReady()
 				}
 			}
@@ -700,6 +719,7 @@ function startPlayerWhenReady(){
 			$('#next-button').removeClass('disabled');
 			$('#shuffle-button').removeClass('disabled');
 			$('#repeat-button').removeClass('disabled');
+			$('#hide-wave').removeClass('disabled');
 			$('#wave').removeClass('disabled');
 			clearInterval(interval);
 		}
