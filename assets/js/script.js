@@ -163,32 +163,20 @@ function getTags(file,done){
 
 	var result = {};
 
-	ID3.loadTags(file.name, function() {
-
-		var tags = ID3.getAllTags(file.name);
-
-		result.artist = tags.artist || "Unknown Artist";
-		result.title = tags.title || "Unknown";
-		result.album = tags.album || "";
-		if(tags.picture && tags.picture.data && tags.picture.data.length) {
-			result.picture = tags.picture;
-			getImageSource(result.picture, function (imageSource) {
-				result.picture = imageSource;
-				done(result);
-			});
-		}
-		else {
-			result.picture = 'assets/img/default.png';
+	new jsmediatags.Reader(file)
+	  //.setTagsToRead(["artist", "title", "album", "picture"])
+	  .setTagsToRead(["artist", "title", "album"])
+	  .read({
+		onSuccess: function(tag) {
+		      	var tags = tag.tags;
+			result.artist = tags.artist || "";
+			result.title = tags.title || file.name;
+			result.album = tags.album || "";
 			done(result);
-		}
-
-
-	}, {
-		tags: ["artist", "title", "album", "picture"],
-		dataReader: FileAPIReader(file)
-	});
-
+    	}
+  });
 }
+
 
 function getImageSource(image, done) {
 	var base64String = "";
@@ -265,16 +253,37 @@ wavesurfer.on('ready', function () {
 	if(playlist[i]){
 		document.title = playlist[i].artist + ' - ' + playlist[i].title;
 
+		var picture;
+
 		// Set cover art.
+		new jsmediatags.Reader(playlist[i].audioTrack)
+			.setTagsToRead(["picture"])
+			.read({
+				onSuccess: function(tag) {
+     					var tags = tag.tags;
+      					if(tags.picture && tags.picture.data && tags.picture.data.length) {
+								picture = tags.picture;
+					getImageSource(picture, function (imageSource) {
+						picture = imageSource;
+					});
+				}
+				else {
+					picture = 'assets/img/default.png';
+				}
 
-		if(playlist[i].picture == 'assets/img/default.png'){
-			$('#cover-art-big').css("background", "");
-		}
-		else{
-			$('#cover-art-big').css("background-image", "url("+ playlist[i].picture +")").css("background-repeat", "no-repeat").css("background-position", "center");
-		}
+				/*if(picture == 'assets/img/default.png'){
+					$('#cover-art-big').css("background", "");
+				}
+				else{
+					$('#cover-art-big').css("background-image", "url("+ picture +")").css("background-repeat", "no-repeat").css("background-position", "center");
+				}
+				*/
+				$('#cover-art-big').css("background-image", "url("+ picture +")").css("background-repeat", "no-repeat").css("background-position", "center");
+				$('#cover-art-small').attr('src', picture);
+			}
 
-		$('#cover-art-small').attr('src', playlist[i].picture);
+
+		});
 
 		// Show the artist and title.
 		$('#track-desc').html('<b>' + playlist[i].title + '</b> by ' + playlist[i].artist);
@@ -739,7 +748,7 @@ function returnTrackHTML(song, index){
 	html+='" data-index="'+ index +'">' +
 	'<div>' +
 	'<span class="overlay"><i class="fa fa-play"></i></span>' +
-	'<img src="' + song.picture + '"/>' +
+	'<img src="assets/img/default.png "/>' +
 	'</div>' +
 	'<div>'	+
 	'<p class="title">' + song.title + '</p>' +
