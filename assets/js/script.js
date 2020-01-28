@@ -280,6 +280,29 @@ wavesurfer.on('ready', function () {
 				*/
 				$('#cover-art-big').css("background-image", "url("+ picture +")").css("background-repeat", "no-repeat").css("background-position", "center");
 				$('#cover-art-small').attr('src', picture);
+
+colorThief = new ColorThief();
+				var img = new Image();
+				img.src = picture;
+
+				img.addEventListener('load', function() {
+					//	var dominantColor = colorThief.getColor(img,25)
+						var altColor = colorThief.getPalette(img,3,25)
+						//console.log(dominantColor);
+						console.log(altColor);
+					//	console.log(wavesurfer.getProgressColor());
+						//console.log(wavesurfer.getHeight());
+					//	wavesurfer.setProgressColor();
+					//	wavesurfer.setWaveColor();
+						var progressColor = rgb(altColor[0][0],altColor[0][1],altColor[0][2]);
+						var waveColor = rgb(altColor[1][0],altColor[1][1],altColor[1][2]);
+						var cursorColor = rgb(altColor[2][0],altColor[2][1],altColor[2][2]);
+						wavesurfer.setColors(progressColor,waveColor,cursorColor);
+						//wavesurfer.drawBuffer();
+
+				});
+
+				
 			}
 
 
@@ -785,6 +808,9 @@ function formatTime(time){
 	return minutes + ":" + seconds;
 }
 
+function rgb(r, g, b){
+  return ["rgb(",r,",",g,",",b,")"].join("");
+}
 
 // Wavesurfer responsiveness
 $(window).on('resize', function(){
