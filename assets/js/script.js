@@ -585,8 +585,15 @@ $('#playlist').on('click', function (e) {
 					$('#track-desc').html('There are no tracks loaded in the player.');
 					$('#current').text('-');
 					$('#total').text('-');
-					$('#container').addClass('disabled');
-
+					$('#previous-button').addClass('disabled');
+					$('#play-button').addClass('disabled');
+					$('#pause-button').addClass('disabled');
+					$('#pause-button').addClass('disabled');
+					$('#stop-button').addClass('disabled');
+					$('#next-button').addClass('disabled');
+					$('#shuffle-button').addClass('disabled');
+					$('#repeat-button').addClass('disabled');
+					$('#wave').addClass('disabled');
 					startPlayerWhenReady()
 				}
 			}
@@ -685,7 +692,15 @@ function startPlayerWhenReady(){
 	var interval = setInterval(function () {
 		if(playlist[0]){
 			playTrack(0);
-			$('#container').removeClass('disabled');
+			$('#previous-button').removeClass('disabled');
+			$('#play-button').removeClass('disabled');
+			$('#pause-button').removeClass('disabled');
+			$('#pause-button').removeClass('disabled');
+			$('#stop-button').removeClass('disabled');
+			$('#next-button').removeClass('disabled');
+			$('#shuffle-button').removeClass('disabled');
+			$('#repeat-button').removeClass('disabled');
+			$('#wave').removeClass('disabled');
 			clearInterval(interval);
 		}
 	},200);
