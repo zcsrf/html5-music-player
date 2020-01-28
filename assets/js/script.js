@@ -13,8 +13,47 @@ startPlayerWhenReady();
 
 
 /*---------------------
-	Dropping files
+	Dropping and Selecting files 
 ----------------------*/
+
+var folderInput = $('#folder-input');
+var fileInput = $('#file-input');
+
+fileInput.on('change', function (e) {
+        e.preventDefault();
+
+        var files = fileInput.get(0).files;
+	console.log("infoadd file:" + files);
+
+        for(var j=0; j<files.length; j++){
+                if(files[j].type.match(/audio\/(mp3|mpeg)/)){
+
+                        getID3Data(files[j], function (song) {
+                                allTracks.push(song);
+                                playlist.push(song);
+                                $('#list').append($(returnTrackHTML(song, playlist.length-1)));
+                        });
+                }
+        }
+});
+
+folderInput.on('change', function (e) {
+	e.preventDefault();
+
+        var files = folderInput.get(0).files;
+		
+        for(var j=0; j<files.length; j++){
+
+                if(files[j].type.match(/audio\/(mp3|mpeg)/)){
+
+                        getID3Data(files[j], function (song) {
+                                allTracks.push(song);
+                                playlist.push(song);
+                                $('#list').append($(returnTrackHTML(song, playlist.length-1)));
+                        });
+                }
+        }
+});
 
 var dropZone = $('#drop-zone'),
 	searchInput = $('#searchBox');
@@ -434,7 +473,15 @@ $('#repeat-button').on('click', function(){
 
 });
 
+$('#add-folder').on('click', function(){
+	console.log("add folder");
+	document.getElementById("folder-input").click();
+});
 
+$('#add-files').on('click', function(){
+	console.log("add file");
+	document.getElementById("file-input").click();
+});
 /*----------------------
 	Playlist navigation
 ----------------------*/
