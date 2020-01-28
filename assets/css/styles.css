@@ -11,6 +11,7 @@ body, html{
 	-webkit-user-select:none;
 	-ms-user-select:none;
 	user-select:none;
+
 }
 
 /*--------------------
@@ -45,7 +46,6 @@ body, html{
 
 #container{
 	height:100%;
-	background-color: #fff;
 	display: -webkit-flex;
 	display: flex;
 	-webkit-flex-direction: column;
@@ -73,7 +73,8 @@ body, html{
 	flex: 1;
 	background-color: #26292C;
 	background-size: cover;
-	-webkit-filter: blur(7px);
+	-webkit-filter: blur(10px);
+	-webkit-filter: brightness(50%);
 	margin: -12px ;
 }
 
@@ -84,7 +85,7 @@ body, html{
 	top: 50%;
 	left: 50%;
 	margin: -250px auto auto -250px;
-	border-radius: 2px;
+	border-radius: 50px;
 }
 
 
@@ -112,6 +113,7 @@ body, html{
 	/*transform: scaleY(1);*/
 	/*margin-bottom: 30px;*/
 	/*background: rgba(255,255,255,0.8);*/
+	background-color: #202020;
 }
 
 #wave.disabled{
@@ -125,12 +127,11 @@ body, html{
 #control-bar{
 	display: -webkit-flex;
 	display: flex;
-	color: #3D464A;
+	color: #b0b0b0;
 	text-align: left;
 
 	position: relative;
 	z-index: 10;
-
 }
 
 #container.disabled #control-bar{
@@ -142,6 +143,7 @@ body, html{
 	flex:2;
 	display: -webkit-flex;
 	display: flex;
+
 }
 
 .player-control div{
@@ -152,45 +154,46 @@ body, html{
 	line-height: 60px;
 	height: 100%;
 	cursor: pointer;
+	background-color: #202020;
 }
 
 #previous-button.disabled{
 	pointer-events: none;
-	color: #758389;
+	color: #404040;
 }
 
 
 #play-button.disabled{
 	pointer-events: none;
-	color: #758389;
+	color: #404040;
 }
 
 
 #pause-button.disabled{
 	pointer-events: none;
-	color: #758389;
+	color: #404040;
 }
 
 
 #stop-button.disabled{
 	pointer-events: none;
-	color: #758389;
+	color: #404040;
 }
 
 
 #next-button.disabled{
 	pointer-events: none;
-	color: #758389;
+	color: #404040;
 }
 
 #container.disabled .player-control div{
-	color: #758389;
+	color: #404040;
 }
 
 #shuffle-button,
 #repeat-button{
 	line-height: 60px;
-	color: #758389;
+	color: #404040;
 	position: relative;
 }
 
@@ -211,7 +214,7 @@ body, html{
 
 #hide-wave.disabled{
 	pointer-events: none;
-	color: #758389;
+	color: #404040;
 }
 
 /*---------------------------
@@ -225,6 +228,8 @@ body, html{
 	-webkit-flex: 3;
 	flex: 3;
 	text-align: left;
+	background-color: #202020
+
 }
 
 /*	Currently playing track details	*/
@@ -236,7 +241,7 @@ body, html{
 	display: -webkit-flex;
 	display: flex;
 	z-index: 20;
-	background-color: #fff;
+	
 	padding: 0 30px 0 40px;
 	cursor: pointer;
 
@@ -247,6 +252,7 @@ body, html{
 #track-details > i{
 	line-height: 60px;
 	margin-right: 15px;
+
 }
 
 #container.disabled #track-details{
@@ -266,6 +272,7 @@ body, html{
 	pointer-events: none;
 	padding-right: 15px;
 	font-weight: normal;
+
 }
 
 #track-details #track-time{
@@ -285,7 +292,7 @@ body, html{
 	left:0;
 	bottom:0;
 	width: 100%;
-	background-color: #fff;
+	background-color: #202020;
 	color: #222;
 	cursor: default;
 
@@ -299,6 +306,7 @@ body, html{
 #expand-bar.hidden{
 	height:0;
 	box-shadow: none;
+
 }
 
 #expand-bar form{
@@ -306,8 +314,9 @@ body, html{
 	padding: 18px;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.4);
 	width:100%;
-	background-color: #fff;
 	z-index: 40;
+	color: #b0b0b0;
+	background-color: #202020;
 }
 
 
@@ -316,6 +325,8 @@ body, html{
 	left: 113px;
 	right: 20px;
 	top: 11px;
+	background-color: #202020;
+
 }
 
 #expand-bar form input{
@@ -325,7 +336,9 @@ body, html{
 	border: 1px solid #ccc;
 	border-radius: 2px;
 	box-shadow: 0 1px 1px #eee;
+	background-color: #202020;
 }
+
 
 /*	Playlist */
 
@@ -338,11 +351,14 @@ body, html{
 	width: 100%;
 	overflow-y: auto;
 	overflow-x: hidden;
+	background-color: #202020;
 }
 
 
 #list li:nth-child(even){
-	background-color: #F8F7F9;
+
+	background-color: #151515;
+
 }
 
 .track{
@@ -351,10 +367,10 @@ body, html{
 	overflow: hidden;
 	color: #3D464A;
 	position: relative;
-}
 
+}	
 .track.active{
-	background-color: #DBE0E4!important;
+	background-color: #303030!important;
 }
 
 .track p.title{
@@ -374,6 +390,7 @@ body, html{
 	height: 70px;
 	margin-right: 25px;
 	float: left;
+
 }
 
 .track .overlay{
@@ -385,7 +402,7 @@ body, html{
 	background-color: rgba(0, 0, 0, 0.4);
 	transition: 0.4s;
 	opacity: 0;
-	border-radius: 3px;
+	border-radius: 15px;
 }
 
 .track.active .overlay{
@@ -394,7 +411,8 @@ body, html{
 
 .track div img{
 	width: 100%;
-	border-radius: 3px;
+	border-radius: 15px;
+
 }
 
 .track span i{
@@ -405,6 +423,8 @@ body, html{
 	position: absolute;
 	transition: 0.4s;
 	opacity: 0;
+
+
 }
 
 .track .remove-track{
@@ -429,11 +449,14 @@ body, html{
 	#control-bar{
 		-webkit-flex-flow: column wrap;
 		flex-flow: column wrap;
+
+
 	}
 
 	.player-control{
 		-webkit-order: 2;
 		order: 2;
+		border-radius: 25px;
 	}
 
 	#playlist {
